@@ -3,6 +3,13 @@ class Api::V1::AddressesController < ApplicationController
 
   before_action :authorize_request
 
+  def index
+    addresses = @current_user.addresses.all
+    render json: {
+      addresses: addresses
+    }
+  end
+
   def create
     if check_body
       render json: { message: 'No field can be empty', code: 204 }, :status => 401
