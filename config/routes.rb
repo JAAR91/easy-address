@@ -3,12 +3,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/new-user', to: "users#create"
       post '/login', to: "users#login"
-      get '/home', to: "cars#index"
-      post '/new-car', to: "cars#create"
-      get '/cars-and-cities', to: "reservations#index"
-      post '/reservations/new', to: "reservations#create"
-      delete '/reservations/:id', to: "reservations#delete"
-      delete '/cars/:id', to: "cars#destroy"
+      get '/address', to: "addresses#index"
+      post '/address/new', to: "addresses#create"
+      delete '/address/delete/:id', to: "addresses#delete"
+      patch '/address/update/:id', to: "reservations#update"
     end
   end
 
