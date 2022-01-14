@@ -3,26 +3,25 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     if check_params
-      render json: { message: 'Username or password cant be empty', code: 204 }
+      render json: { message: 'Username or password cant be empty', code: 204 }, :status => 401
     elsif check_user
-      render json: { message: 'User already exist', code: 204 }
+      render json: { message: 'User already exist', code: 204 }, :status => 409
     else
       @user = User.new(body_params)
       if @user.save
         token = AuthenticateUser.new(body_params[:username], body_params[:password]).call
         token['message'] = 'User Created Succesfuly!'
         token['code'] = 200
-        render json: token
+        render json: token, , :status => 200
       else
-        #render json: { message: 'User is already in use', code: 409 }
-        render json: { message: body_params[:username], code: 409 }
+        render json: { message: 'User is already in use' }, :status => 409
       end
     end
   end
 
   def login
     if check_params
-      render json: { message: 'User or password cant be empty', code: 204 }
+      render json: { message: 'User or password cant be empty'}, :status => 401
     else
       @user = User.find_by(username: body_params[:username])
       if @user && (@user.password == body_params[:password])
@@ -31,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
         token['code'] = 200
         render json: token, :status => 200
       else
-        render json: { message: 'User or password incorrect', code: 201 }, :status => 201
+        render json: { message: 'User or password incorrect', code: 201 }, :status => 409
       end
     end
   end
