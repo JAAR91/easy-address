@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      post '/new-user', to: "users#create"
+      post '/user/new', to: "users#create"
       post '/login', to: "users#login"
       get '/address', to: "addresses#index"
       post '/address/new', to: "addresses#create"
