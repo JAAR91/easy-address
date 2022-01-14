@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get '/address', to: "addresses#index"
       post '/address/new', to: "addresses#create"
       delete '/address/delete/:id', to: "addresses#delete"
-      patch '/address/update/:id', to: "reservations#update"
+      patch '/address/update/:id', to: "addresses#update"
     end
   end
 

@@ -23,8 +23,18 @@ class Api::V1::AddressesController < ApplicationController
     end
   end
 
-  private
+  def update
+    address = Address.find_by(id: params[:id])
+    if address.nil?
+      render json: { message: "Address does not exist!"}, :status => 404
+    elsif address.update(body_address)
+      render json: { message: "Address has been updated!"}, :status => 200
+    else
+      render json: { message: "Unable to update address!"}, :status => 409
+    end
+  end
 
+  private
 
   def check_body
     return true if body_address[:user_id] == "" || body_address[:user_id].nil?
