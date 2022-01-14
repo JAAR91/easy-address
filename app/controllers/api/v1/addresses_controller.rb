@@ -23,6 +23,16 @@ class Api::V1::AddressesController < ApplicationController
     end
   end
 
+  def delete
+    address = Address.find_by(id: params[:id])
+    if address.nil?
+      render json: { message: "Address does not exist!"}, :status => 404
+    else
+      address.destroy
+      render json: { message: "Address has been deleted!"}, :status => 200
+    end
+  end
+
   def update
     address = Address.find_by(id: params[:id])
     if address.nil?
