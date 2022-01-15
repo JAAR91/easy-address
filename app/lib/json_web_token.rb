@@ -8,6 +8,7 @@ class JsonWebToken
 
   def self.decode(token)
     JWT.decode(token, HMAC_SECRET)[0]
+    p HMAC_SECRET
   rescue JWT::DecodeError => e
     return false
   end
