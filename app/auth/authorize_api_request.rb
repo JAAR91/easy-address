@@ -15,7 +15,8 @@ class AuthorizeApiRequest
     http_auth_header = @headers['Authorization'].split.last if @headers['Authorization'].present?
     return { message: 'Missing Token!', code: 409 } unless http_auth_header
     decoded_auth_token = JsonWebToken.decode(http_auth_header)
-    return { message: 'Wrong Token!', code: 404, ans: decoded_auth_token } unless decoded_auth_token
+    #return { message: 'Wrong Token!', code: 404 } unless decoded_auth_token
+    return { message: decoded_auth_token, code: 404 } unless decoded_auth_token
     user = User.find(decoded_auth_token['user_id'])
 
     { user: user, code: 1 }
