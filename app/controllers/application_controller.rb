@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if status[:code] == 1
       @current_user = status[:user]
     else
-      render json: status
+      render json: { message: status[:message]}, :status => status[:code]
     end
     nil
   end
