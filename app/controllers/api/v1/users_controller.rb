@@ -10,9 +10,7 @@ class Api::V1::UsersController < ApplicationController
       @user = User.new(body_params)
       if @user.save
         token = AuthenticateUser.new(body_params[:username], body_params[:password]).call
-        token['message'] = 'User Created Succesfuly!'
-        token['code'] = 200
-        render json: token, :status => 200
+        render json: { token: token, message: 'User Created Succesfuly!' }, :status => 200
       else
         render json: { message: 'User is already in use' }, :status => 409
       end
