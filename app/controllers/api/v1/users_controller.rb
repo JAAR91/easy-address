@@ -24,9 +24,7 @@ class Api::V1::UsersController < ApplicationController
       @user = User.find_by(username: body_params[:username])
       if @user && (@user.password == body_params[:password])
         token = AuthenticateUser.new(body_params[:username], body_params[:password]).call
-        token['message'] = 'Logged in Succesfuly!'
-        token['code'] = 200
-        render json: token, :status => 200
+        render json: { token: token, message: 'Logged in Succesfuly!'}, :status => 200
       else
         render json: { message: 'User or password incorrect', code: 201 }, :status => 409
       end
