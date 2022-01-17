@@ -59,7 +59,6 @@ class Api::V1::AddressesController < ApplicationController
   end
 
   def body_address
-    p current_user
     params.permit(:calle, :ext_number, :int_number, :postal_code, :colonia, :municipio, :estado, :pais ).include(user_id: current_user.id)
   end
   
