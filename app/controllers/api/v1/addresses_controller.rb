@@ -47,7 +47,6 @@ class Api::V1::AddressesController < ApplicationController
   private
 
   def check_body
-    return true if body_address[:user_id] == "" || body_address[:user_id].nil?
     return true if body_address[:calle] == "" || body_address[:calle].nil?
     return true if body_address[:ext_number] == "" || body_address[:ext_number].nil?
     return true if body_address[:int_number] == "" || body_address[:int_number].nil?
@@ -60,7 +59,8 @@ class Api::V1::AddressesController < ApplicationController
   end
 
   def body_address
-    params.permit(:user_id, :calle, :ext_number, :int_number, :postal_code, :colonia, :municipio, :estado, :pais )
+    p current_user
+    params.permit(:calle, :ext_number, :int_number, :postal_code, :colonia, :municipio, :estado, :pais ).include(user_id: current_user.id)
   end
   
 end
