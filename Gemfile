@@ -6,6 +6,7 @@ ruby "3.0.0"
 gem "pg"
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem 'rack-cors'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
