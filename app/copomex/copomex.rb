@@ -8,8 +8,4 @@ class Copomex
     response = RestClient.get url
     JSON.parse response.to_str
   end
-
-  def test
-    "this is a test"
-  end
 end
