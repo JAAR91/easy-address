@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post '/address/new', to: "addresses#create"
       delete '/address/delete/:id', to: "addresses#delete"
       patch '/address/update/:id', to: "addresses#update"
+      get '/postal/:code', to: "postal#verify"
     end
   end
 
